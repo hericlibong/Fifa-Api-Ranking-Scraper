@@ -53,7 +53,10 @@ venv\Scripts\activate
 ```
 pip install -r requirements.txt
 ```
+In the `settings` set ROBOTSTXT_OBEY to False
 
+# Obey robots.txt rules
+ROBOTSTXT_OBEY = False
 
 ### Run the Scrapy Spider
 To start the scraping process, run the Scrapy spider:
