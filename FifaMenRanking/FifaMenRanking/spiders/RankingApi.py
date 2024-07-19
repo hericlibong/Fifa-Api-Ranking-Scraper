@@ -1,5 +1,6 @@
 import scrapy
 import json
+from datetime import datetime
 
 
 class RankingapiSpider(scrapy.Spider):
@@ -14,8 +15,9 @@ class RankingapiSpider(scrapy.Spider):
         for year_data in date_list:
             for date_item in year_data['dates']:
                 url = f"https://inside.fifa.com/api/ranking-overview?locale=en&dateId={date_item['id']}"
-                date = date_item ['iso']
-                yield scrapy.Request(url=url, callback=self.parse_ranking_data, meta={'date':date})
+                date_iso = date_item ['iso']
+                date_formatted = datetime.strptime(date_iso, "%Y-%m-%dT%H:%M:%S.%fZ").strftime("%Y-%m-%d")
+                yield scrapy.Request(url=url, callback=self.parse_ranking_data, meta={'date':date_formatted})
 
     def parse_ranking_data(self, response):
         data = json.loads(response.body)
