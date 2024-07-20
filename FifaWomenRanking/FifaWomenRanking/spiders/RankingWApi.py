@@ -25,7 +25,6 @@ class RankingwapiSpider(scrapy.Spider):
         else:
             self.logger.warning("Pas de contenu script trouvé")        
 
-
     def parse_ranking(self, response):
         try:
             data = json.loads(response.body)
